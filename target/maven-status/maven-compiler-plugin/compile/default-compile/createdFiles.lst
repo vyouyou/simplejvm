@@ -1,0 +1,12 @@
+com\youyou\MainApplication.class
+com\youyou\modules\config\BootStrapConfig.class
+com\youyou\modules\loader\UserClassLoader.class
+com\youyou\modules\loader\IClassLoader.class
+com\youyou\modules\loader\FileLoader.class
+com\youyou\common\exception\ExceptionEnum.class
+com\youyou\common\exception\SmpException.class
+com\youyou\modules\loader\AbstractClassLoader.class
+com\youyou\common\constants\StringConstants.class
+com\youyou\modules\bootstrap\Boot.class
+com\youyou\modules\loader\ExtClassLoader.class
+com\youyou\modules\loader\BootStrapClassLoader.class
