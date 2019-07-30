@@ -1,3 +1,5 @@
+package bootstraptest;
+
 import com.youyou.modules.config.BootStrapConfig;
 import org.junit.Assert;
 import org.junit.Test;

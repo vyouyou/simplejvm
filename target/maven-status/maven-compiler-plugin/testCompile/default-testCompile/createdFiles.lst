@@ -1,2 +1,4 @@
 loadertest\FileLoaderTest.class
+loadertest\BootStrapLoaderTest.class
+readertest.class
 ConfigTest.class
