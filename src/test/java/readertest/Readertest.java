@@ -4,6 +4,7 @@ import com.youyou.modules.loader.file.FileLoader;
 import com.youyou.modules.reader.ClassFile;
 import com.youyou.modules.reader.ClassReader;
 import com.youyou.modules.reader.constant.ConstantPool;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -19,5 +20,6 @@ public class Readertest {
         FileLoader loader = new FileLoader(this.getClass().getResource("/").getPath());
         byte[] bytes = loader.loadFile("ConstantPoolTest");
         ClassFile file = new ClassFile(new ClassReader(bytes));
+        Assert.assertEquals(file.getConstantPool().getConstantInfos().size(), 33);
     }
 }

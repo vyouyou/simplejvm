@@ -2,6 +2,7 @@ package com.youyou.modules.reader;
 
 import com.youyou.common.exception.ExceptionEnum;
 import com.youyou.modules.reader.constant.ConstantPool;
+import lombok.Getter;
 
 /**
  * @Author qishiyu
@@ -13,6 +14,7 @@ public class ClassFile {
 
     private static final short JDK_VERSION_8 = 52;
 
+    @Getter
     private ConstantPool constantPool;
 
     private ClassReader reader;
@@ -47,4 +49,5 @@ public class ClassFile {
             throw ExceptionEnum.CLASS_VERSION_NOT_SUPPORT.getException();
         }
     }
+
 }

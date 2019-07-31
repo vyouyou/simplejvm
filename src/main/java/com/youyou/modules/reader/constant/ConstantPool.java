@@ -3,6 +3,7 @@ package com.youyou.modules.reader.constant;
 import com.youyou.common.constants.ClassFileConstants;
 import com.youyou.modules.reader.ClassReader;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  * @Author qishiyu
  * @create 2019/7/29 15:13
  */
+@Slf4j
 public class ConstantPool {
 
     @Getter
@@ -21,9 +23,9 @@ public class ConstantPool {
 
     public ConstantPool(ClassReader reader) {
         this.reader = reader;
-        int poolSize = reader.readShort();
-        constantInfos = new ArrayList<>(poolSize - 1);
-        for (int i = 1; i < poolSize; i++) {
+        int poolSize = reader.readShort() - 1;
+        constantInfos = new ArrayList<>(poolSize);
+        while (constantInfos.size() < poolSize) {
             readConstantInfo();
         }
     }
@@ -60,6 +62,11 @@ public class ConstantPool {
                 info = new ConstantFloat();
                 ((ConstantFloat) info).setValue(reader.readFloat());
                 break;
+            // http://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.5
+            // All 8-byte constants take up two entries in the constant_pool table of the class file.
+            // If a CONSTANT_Long_info or CONSTANT_Double_info structure is the item in the constant_pool
+            // table at index n, then the next usable item in the pool is located at index n+2.
+            // The constant_pool index n+1 must be valid but is considered unusable.
             case ClassFileConstants.LONG_INFO:
                 info = new ConstantLong();
                 ((ConstantLong) info).setValue(reader.readLong());
@@ -77,9 +84,15 @@ public class ConstantPool {
                 ((ConstantDouble) info).setValue(reader.readDouble());
                 break;
             default:
+                log.info("get unknown tag {}", tag);
         }
-        if (info != null) {
-            info.setTag(tag);
+        if (info == null) {
+            return;
+        }
+        info.setTag(tag);
+        constantInfos.add(info);
+        if (tag == ClassFileConstants.DOUBLE_INFO || tag == ClassFileConstants.LONG_INFO) {
+            constantInfos.add(new ConstantInfo());
         }
     }
 }

@@ -23,23 +23,23 @@ public class ClassReader {
     }
 
     public short readShort() {
-        return BitConverter.ToInt16(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 2), 2);
+        return BitConverter.ToInt16(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 2));
     }
 
     public int readInt() {
-        return BitConverter.ToInt32(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 4), 4);
+        return BitConverter.ToInt32(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 4));
     }
 
     public long readLong() {
-        return BitConverter.ToInt64(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 8), 8);
+        return BitConverter.ToInt64(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 8));
     }
 
     public float readFloat() {
-        return BitConverter.ToFloat(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 4), 4);
+        return BitConverter.ToFloat(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 4));
     }
 
     public double readDouble() {
-        return BitConverter.ToDouble(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 8), 8);
+        return BitConverter.ToDouble(Arrays.copyOfRange(bytes, byteIndex, byteIndex = byteIndex + 8));
     }
 
     public byte[] readBytes(int n) {
