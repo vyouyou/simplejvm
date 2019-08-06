@@ -1,5 +1,9 @@
 package com.youyou.common.utils;
 
+import org.apache.logging.log4j.core.util.ArrayUtils;
+
+import java.nio.ByteBuffer;
+
 /**
  * 位处理，字节处理
  *
@@ -37,7 +41,7 @@ public class BitConverter {
 
     public static long ToInt64(byte[] buffer) {
         long values = 0;
-        for (int i = 7; i >= 0; i--) {
+        for (int i = 0; i < 8; i++) {
             values <<= 8;
             values |= (buffer[i] & 0xFF);
         }
@@ -46,7 +50,7 @@ public class BitConverter {
 
     public static long ToUInt64(byte[] bytes) {
         long result = 0;
-        for (int i = 7; i >= 0; i--) {
+        for (int i = 0; i < 8; i++) {
             result |= ((int) bytes[i] & 0xff) << i;
         }
         return result;
@@ -57,7 +61,7 @@ public class BitConverter {
     }
 
     public static double ToDouble(byte[] arr) {
-        return Double.longBitsToDouble(ToUInt64(arr));
+        return ByteBuffer.wrap(arr).getDouble();
     }
 
     public static boolean ToBoolean(byte[] bytes) {
@@ -66,17 +70,17 @@ public class BitConverter {
 
     public static byte[] GetBytes(short value) {
         byte[] bytes = new byte[2];
-        bytes[0] = (byte) (value & 0xff);
-        bytes[1] = (byte) ((value & 0xff00) >> 8);
+        bytes[1] = (byte) (value & 0xff);
+        bytes[0] = (byte) ((value & 0xff00) >> 8);
         return bytes;
     }
 
     public static byte[] GetBytes(int value) {
         byte[] bytes = new byte[4];
-        bytes[0] = (byte) ((value) & 0xFF); //最低位
-        bytes[1] = (byte) ((value >> 8) & 0xFF);
-        bytes[2] = (byte) ((value >> 16) & 0xFF);
-        bytes[3] = (byte) ((value >>> 24)); //最高位，无符号右移
+        bytes[3] = (byte) ((value) & 0xFF); //最低位
+        bytes[2] = (byte) ((value >> 8) & 0xFF);
+        bytes[1] = (byte) ((value >> 16) & 0xFF);
+        bytes[0] = (byte) ((value >>> 24)); //最高位，无符号右移
         return bytes;
     }
 
@@ -121,7 +125,7 @@ public class BitConverter {
         return b;
     }
 
-    public static byte[] Concat(byte[]... bs) {
+    public static byte[] concat(byte[]... bs) {
         int len = 0, idx = 0;
         for (byte[] b : bs) {
             len += b.length;

@@ -10,7 +10,12 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Slot {
-    private int num;
-
+    /**
+     * 存放字段
+     */
+    private byte[] num;
+    /**
+     * 存放引用
+     */
     private Object ref;
 }
