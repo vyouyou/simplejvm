@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 将各种临时变量存储到slot中去
+ *
  * @Author qishiyu
  * @create 2019/8/6 20:46
  */
@@ -25,25 +27,25 @@ public class BaseSlotHandler<T extends List<Slot>> {
             set64ByteData(index, BitConverter.GetBytes((long) value));
         } else if (value instanceof Double) {
             set64ByteData(index, BitConverter.GetBytes((double) value));
-        }else{
+        } else {
             slotList.get(index).setRef(value);
         }
     }
 
     public int getInt(int index) {
-        return BitConverter.ToInt32(slotList.get(index).getNum());
+        return BitConverter.toInt32(slotList.get(index).getNum());
     }
 
     public float getFloat(int index) {
-        return BitConverter.ToFloat(slotList.get(index).getNum());
+        return BitConverter.toFloat(slotList.get(index).getNum());
     }
 
     public long getLong(int index) {
-        return BitConverter.ToInt64(get64ByteData(index));
+        return BitConverter.toInt64(get64ByteData(index));
     }
 
     public double getDouble(int index) {
-        return BitConverter.ToDouble(get64ByteData(index));
+        return BitConverter.toDouble(get64ByteData(index));
     }
 
     private void set64ByteData(int index, byte[] bytes) {

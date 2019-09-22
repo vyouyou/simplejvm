@@ -21,7 +21,8 @@ public class OperandStack extends BaseSlotHandler<Stack<Slot>> {
         super.slotList = new Stack<>();
     }
 
-    public void pushInt(int value) {
+    public void pushValue(int value) {
+        push(value);
     }
 
     public int popInt() {
@@ -31,7 +32,8 @@ public class OperandStack extends BaseSlotHandler<Stack<Slot>> {
         return value;
     }
 
-    public void pushFloat(float value) {
+    public void pushValue(float value) {
+        push(value);
     }
 
     public float popFloat() {
@@ -41,15 +43,31 @@ public class OperandStack extends BaseSlotHandler<Stack<Slot>> {
         return value;
     }
 
-    public void pushLong(long value) {
+    public void pushValue(long value) {
+        push(value);
     }
 
-    private void push() {
-        slotList.push(new Slot());
+    public void pushValue(double value) {
+        push(value);
+    }
+
+    public void pushRef(Object object) {
+        setValue(index++, object);
     }
 
     private void pop() {
         slotList.pop();
+    }
+
+    private void push(Object object) {
+        slotList.add(new Slot());
+        int tempIndex = index + 1;
+        if (object instanceof Long || object instanceof Double) {
+            slotList.add(new Slot());
+            tempIndex++;
+        }
+        setValue(index, object);
+        index = tempIndex;
     }
 
 }

@@ -11,19 +11,19 @@ import java.nio.ByteBuffer;
  */
 public class BitConverter {
 
-    public static short ToInt16(byte[] bytes) {
+    public static short toInt16(byte[] bytes) {
         short result = (short) ((int) bytes[1] & 0xff);
         result |= ((int) bytes[0] & 0xff) << 8;
         return (short) (result & 0xffff);
     }
 
-    public static int ToUInt16(byte[] bytes) {
+    public static int toUInt16(byte[] bytes) {
         int result = (int) bytes[1] & 0xff;
         result |= ((int) bytes[0] & 0xff) << 8;
         return result & 0xffff;
     }
 
-    public static int ToInt32(byte[] bytes) {
+    public static int toInt32(byte[] bytes) {
         int result = (int) bytes[3] & 0xff;
         result |= ((int) bytes[2] & 0xff) << 8;
         result |= ((int) bytes[1] & 0xff) << 16;
@@ -31,7 +31,7 @@ public class BitConverter {
         return result;
     }
 
-    public static long ToUInt32(byte[] bytes) {
+    public static long toUInt32(byte[] bytes) {
         long result = (int) bytes[3] & 0xff;
         result |= ((int) bytes[2] & 0xff) << 8;
         result |= ((int) bytes[1] & 0xff) << 16;
@@ -39,7 +39,7 @@ public class BitConverter {
         return result & 0xFFFFFFFFL;
     }
 
-    public static long ToInt64(byte[] buffer) {
+    public static long toInt64(byte[] buffer) {
         long values = 0;
         for (int i = 0; i < 8; i++) {
             values <<= 8;
@@ -48,7 +48,7 @@ public class BitConverter {
         return values;
     }
 
-    public static long ToUInt64(byte[] bytes) {
+    public static long toUInt64(byte[] bytes) {
         long result = 0;
         for (int i = 0; i < 8; i++) {
             result |= ((int) bytes[i] & 0xff) << i;
@@ -56,15 +56,15 @@ public class BitConverter {
         return result;
     }
 
-    public static float ToFloat(byte[] bs) {
-        return Float.intBitsToFloat(ToInt32(bs));
+    public static float toFloat(byte[] bs) {
+        return Float.intBitsToFloat(toInt32(bs));
     }
 
-    public static double ToDouble(byte[] arr) {
+    public static double toDouble(byte[] arr) {
         return ByteBuffer.wrap(arr).getDouble();
     }
 
-    public static boolean ToBoolean(byte[] bytes) {
+    public static boolean toBoolean(byte[] bytes) {
         return (bytes[0] == 0x00) ? false : true;
     }
 
@@ -106,15 +106,15 @@ public class BitConverter {
         return new byte[]{(byte) (value ? 1 : 0)};
     }
 
-    public static byte IntToByte(int x) {
+    public static byte InttoByte(int x) {
         return (byte) x;
     }
 
-    public static int ByteToInt(byte b) {
+    public static int BytetoInt(byte b) {
         return b & 0xFF;
     }
 
-    public static char ToChar(byte[] bs) {
+    public static char toChar(byte[] bs) {
         return (char) (((bs[0] & 0xFF) << 8) | (bs[1] & 0xFF));
     }
 
